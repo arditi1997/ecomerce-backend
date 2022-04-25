@@ -1,7 +1,6 @@
 package al.ecommerce.shop.auth;
 
-import al.ecommerce.shop.domain.user.model.User;
-import al.ecommerce.shop.domain.user.repository.UserRepository;
+import al.ecommerce.shop.user.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,8 +22,6 @@ public class JwtAuthenticationController {
     @Autowired
     private JwtUserDetailsService userDetailsService;
 
-    @Autowired
-    private UserRepository userRepository;
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtRequest jwtRequest) throws Exception {
 

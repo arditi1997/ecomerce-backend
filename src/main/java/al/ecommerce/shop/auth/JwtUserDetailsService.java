@@ -1,8 +1,7 @@
 package al.ecommerce.shop.auth;
 
-import al.ecommerce.shop.domain.user.model.User;
-import al.ecommerce.shop.domain.user.model.UserDetailsImpl;
-import al.ecommerce.shop.domain.user.repository.UserRepository;
+import al.ecommerce.shop.user.model.User;
+import al.ecommerce.shop.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

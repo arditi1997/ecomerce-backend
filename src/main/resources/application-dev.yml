@@ -29,14 +29,15 @@ shop:
     secret: ants
     tokenvalidityinhours: 12
 
-paypal:
-  mode: sandbox
-  account: sb-c8tvt13908975@business.example.com
-  client:
-    id: AUOZZ4Wzxe0k2CkkxquC9U3rw1KMaBGhs09uxD-ndmpaFoOyJ1Hc29WyIPSZX-Iuh4TTjWi10fSPdpgX
-    secret: EM5NzXUOHlOkLht-M0N_qlUaSn7QOMAxgvEcgwi0snarSg0xr56tNVy-R87YhQj6BA2lJo_6GVfP3qtF
-
-braintree:
-  merchantId: yyykmfh54fjwpjfh
-  publicKey: 2ndtf7qdn4km879s
-  privateKey: 550e45cc806c18c6411ab3fb772d754f
+payment:
+  paypal:
+    mode: sandbox
+    account: sb-c8tvt13908975@business.example.com
+    client:
+      id: AUOZZ4Wzxe0k2CkkxquC9U3rw1KMaBGhs09uxD-ndmpaFoOyJ1Hc29WyIPSZX-Iuh4TTjWi10fSPdpgX
+      secret: EM5NzXUOHlOkLht-M0N_qlUaSn7QOMAxgvEcgwi0snarSg0xr56tNVy-R87YhQj6BA2lJo_6GVfP3qtF
+  braintree:
+    merchantId: yyykmfh54fjwpjfh
+    publicKey: 2ndtf7qdn4km879s
+    privateKey: 550e45cc806c18c6411ab3fb772d754f
+    mode: sandbox

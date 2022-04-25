@@ -1,6 +1,6 @@
 package al.ecommerce.shop.auth;
 
-import al.ecommerce.shop.domain.role.model.ERole;
+import al.ecommerce.shop.role.model.ERole;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -11,7 +11,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -56,26 +55,26 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         corsConfiguration.setAllowedOrigins(List.of("http://localhost:4200"));
         corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PUT", "OPTIONS", "PATCH", "DELETE"));
         corsConfiguration.setAllowCredentials(true);
-// We don't need CSRF for this example
+        // We don't need CSRF for this example
         httpSecurity.cors().configurationSource(request -> corsConfiguration).and().csrf().disable()
-// dont authenticate this particular request
+        // dont authenticate this particular request
                 .authorizeRequests()
                 .antMatchers("/authenticate").permitAll()
-                .antMatchers(HttpMethod.GET, "/user/users").permitAll()
-                .antMatchers(HttpMethod.POST, "/upload").hasAuthority(ERole.ADMIN.getName())
-                .antMatchers(HttpMethod.GET, "/user/admin/users").hasAuthority(ERole.ADMIN.getName())
-                .antMatchers(HttpMethod.POST,"/user/admin/create-user").hasAuthority(ERole.ADMIN.getName())
-                .antMatchers(HttpMethod.PUT, "/user/admin/update-user").hasAuthority(ERole.ADMIN.getName())
-                .antMatchers(HttpMethod.GET, "/product/product-list").permitAll()
-                .antMatchers(HttpMethod.GET, "/product/admin/product-list").permitAll()
-                .antMatchers(HttpMethod.POST,"/product/admin/create-product").hasAuthority(ERole.ADMIN.getName())
-                .antMatchers(HttpMethod.POST,"/product/admin/update-product/{id}").hasAuthority(ERole.ADMIN.getName())
-                .antMatchers(HttpMethod.POST,"/product/admin/delete-product/{id}").hasAuthority(ERole.ADMIN.getName())
-                .antMatchers(HttpMethod.GET, "/category/categories").permitAll()
-                .antMatchers(HttpMethod.GET, "/category/admin/categories").hasAuthority(ERole.ADMIN.getName())
-                .antMatchers(HttpMethod.POST,"/category/admin/create-category").hasAuthority(ERole.ADMIN.getName())
-                .antMatchers(HttpMethod.PUT, "/category/admin/update-category/{id}").hasAuthority(ERole.ADMIN.getName())
-                .antMatchers(HttpMethod.PUT, "/category/admin/delete-category/{id}").hasAuthority(ERole.ADMIN.getName()).
+                .antMatchers(HttpMethod.GET, "/users").hasAuthority(ERole.ADMIN.getName())
+                .antMatchers(HttpMethod.GET, "/users/create").permitAll()
+                .antMatchers(HttpMethod.GET, "/users/update/*").hasAuthority(ERole.USER.getName())
+                .antMatchers(HttpMethod.GET, "/users/delete").hasAuthority(ERole.ADMIN.getName())
+                .antMatchers(HttpMethod.GET, "/products/delete").hasAuthority(ERole.ADMIN.getName())
+                .antMatchers(HttpMethod.GET, "/products/list").hasAuthority(ERole.USER.getName())
+                .antMatchers(HttpMethod.GET, "/products/create").hasAuthority(ERole.ADMIN.getName())
+                .antMatchers(HttpMethod.GET, "/products/update/*").hasAuthority(ERole.ADMIN.getName())
+                .antMatchers(HttpMethod.GET, "/file/files").hasAuthority(ERole.USER.getName())
+                .antMatchers(HttpMethod.GET, "/file/upload").hasAuthority(ERole.ADMIN.getName())
+                .antMatchers(HttpMethod.GET, "/file/files/*").hasAuthority(ERole.USER.getName())
+                .antMatchers(HttpMethod.GET, "/category/list").fullyAuthenticated()
+                .antMatchers(HttpMethod.GET, "/category/create").hasAuthority(ERole.ADMIN.getName())
+                .antMatchers(HttpMethod.GET, "/category/update/*").hasAuthority(ERole.ADMIN.getName())
+                .antMatchers(HttpMethod.GET, "/category/delete").hasAuthority(ERole.ADMIN.getName()).
         anyRequest().fullyAuthenticated()
       .and()
                 //logout will log the user out by invalidate session.

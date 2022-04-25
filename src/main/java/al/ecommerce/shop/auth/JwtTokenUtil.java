@@ -1,6 +1,6 @@
 package al.ecommerce.shop.auth;
 
-import al.ecommerce.shop.domain.user.model.User;
+import al.ecommerce.shop.user.model.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -59,7 +59,6 @@ public class JwtTokenUtil implements Serializable {
         claims.put("username", user.getUsername());
         claims.put("age", user.getAge());
         claims.put("gender", user.getGender());
-        claims.put("password", user.getPassword());
         return doGenerateToken(claims, user.getUsername());
     }
 
