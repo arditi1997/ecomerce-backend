@@ -3,11 +3,11 @@ package al.ecommerce.shop;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class ShopApplicationTests {
-
-	@Test
-	void contextLoads() {
-	}
-
-}
+//@SpringBootTest
+//class ShopApplicationTests {
+//
+//	@Test
+//	void contextLoads() {
+//	}
+//
+//}
