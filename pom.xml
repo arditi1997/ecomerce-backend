@@ -74,6 +74,22 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>com.google.cloud.tools</groupId>
+				<artifactId>jib-maven-plugin</artifactId>
+				<version>3.0.0</version>
+				<configuration>
+					<from>
+						<image>openjdk:16-jdk-slim</image>
+					</from>
+					<container>
+						<ports>
+							<port>8082</port>
+							<port>15370</port>
+						</ports>
+					</container>
+				</configuration>
+			</plugin>
+			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
